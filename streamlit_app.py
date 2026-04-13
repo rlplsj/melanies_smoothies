@@ -37,12 +37,7 @@ try:
                 st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
                 
                 fruityvice_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + search_on)
-                fruityvice_response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
-                
-                if fruityvice_response.status_code == 200:
-                    fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
-                else:
-                    st.warning(f"Failed to fetch details for {fruit_chosen}")
+                fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
             
             except requests.exceptions.RequestException as e:
                 st.error(f"Failed to fetch details for {fruit_chosen}: {str(e)}")
